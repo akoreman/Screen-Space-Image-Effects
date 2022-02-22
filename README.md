@@ -7,7 +7,7 @@ Some of the effects are demonstrated on a still from Big Buck Bunny, (c) copyrig
 - Edge detection shader
   - Supports 3 sampling kernels (Sobel, Scharr, Prewitt).
   - Either display the gradients or add or subtract those from the input image.
-- Cel shading effect by limiting the number of available colors.
+- Pixel based cel shading effect by limiting the number of available colors.
 
 
 # Screenshots
@@ -16,3 +16,6 @@ Some of the effects are demonstrated on a still from Big Buck Bunny, (c) copyrig
 
 **Using the Sobel filter to create a black outline effect**  
 <a href="https://github.com/akoreman/Screen-Space-Effects"><img src="https://raw.github.com/akoreman/screen-space-effects/main/images/SubtractSobel.png" width="400"></a>  
+
+**Pixel based cel shading effect**
+<a href="https://github.com/akoreman/Screen-Space-Effects"><img src="https://raw.github.com/akoreman/screen-space-effects/main/images/PixelCel.png" width="400"></a>  
