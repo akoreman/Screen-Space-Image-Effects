@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PixelCelShadingMaterial
-  m_Shader: {fileID: 4800000, guid: d7cdc5ece6351ea45b5b8b429b0132d9, type: 3}
+  m_Name: GaussianBlurMaterial
+  m_Shader: {fileID: 4800000, guid: 0fab7390e6de7224d9d28a3f296ce21e, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -72,7 +72,6 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
-    - _numBands: 8
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

@@ -48,8 +48,10 @@ Shader "Effects/BloomEffectShader"
             {
                 fixed4 col = tex2D(_MainTex, i.uv);
  
-                if (intensity(col) > .95)
+                if (intensity(col) > .9)
 					col.xyz = float3(1.0, 1.0, 1.0);
+                //else
+                //    col.xyz = float3(0.0, 0.0, 0.0);
 
 				return col;
  
