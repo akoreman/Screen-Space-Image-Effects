@@ -8,6 +8,7 @@ Some of the effects are demonstrated on a still from Big Buck Bunny, (c) copyrig
   - Supports 3 sampling kernels (Sobel, Scharr, Prewitt).
   - Either display the gradients or add or subtract those from the input image.
 - Pixel based cel shading effect by limiting the number of available colors.
+- Multi-pass Gaussian blur, support for varying radius and standard deviation.
 
 
 # Screenshots
