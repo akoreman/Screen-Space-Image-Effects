@@ -6,15 +6,11 @@ Shader "Effects/GaussianBlurShader"
     }
     SubShader
     {
-        // No culling or depth
         Cull Off ZWrite Off ZTest Always
 
         Pass
         {
             CGPROGRAM
-
-
-
 
             #pragma vertex vert
             #pragma fragment frag
@@ -48,17 +44,15 @@ Shader "Effects/GaussianBlurShader"
 
             fixed4 frag (v2f input) : SV_Target
             {
-
                 float4 col = _kernel[_radius] * tex2D(_MainTex, input.uv);
                 float stepX = 1.0 / (_ScreenParams.x);
-                float stepY = 1.0 / (_ScreenParams.y);
-
+                
                 for (int i = 1; i < _radius; i++)
                 {
                     col += _kernel[_radius + i] * tex2D(_MainTex, input.uv + float2(i * stepX, 0));
-                    col += _kernel[_radius + i] * tex2D(_MainTex, input.uv - float2(i * stepX, 0));
+                    col += _kernel[_radius - i] * tex2D(_MainTex, input.uv - float2(i * stepX, 0));
                 }
-
+                
                 return col;
             }
             ENDCG
@@ -67,7 +61,6 @@ Shader "Effects/GaussianBlurShader"
         Pass
         {
             CGPROGRAM
-
 
             #pragma vertex vert
             #pragma fragment frag
@@ -98,12 +91,17 @@ Shader "Effects/GaussianBlurShader"
             int _radius;
             float _kernel[64];
 
-
-            fixed4 frag(v2f i) : SV_Target
+            fixed4 frag(v2f input) : SV_Target
             {
-                fixed4 col = tex2D(_MainTex, i.uv);
-                // just invert the colors
-                //col.rgb = 1 - col.rgb;
+                float4 col = _kernel[_radius] * tex2D(_MainTex, input.uv);
+                float stepY = 1.0 / (_ScreenParams.y);
+
+                for (int i = 1; i < _radius; i++)
+                {
+                    col += _kernel[_radius + i] * tex2D(_MainTex, input.uv + float2(0, i * stepY));
+                    col += _kernel[_radius - i] * tex2D(_MainTex, input.uv - float2(0, i * stepY));
+                }
+
                 return col;
             }
         ENDCG

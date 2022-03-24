@@ -6,6 +6,7 @@ public class ApplyGaussianBlurEffect : MonoBehaviour
 {
     public Material material;
 
+    
     public int radius = 5;
 
     public float stdDev = 1.0f;
@@ -30,20 +31,27 @@ public class ApplyGaussianBlurEffect : MonoBehaviour
 
         output[radius] = Gaussian(0, stdDev);
 
+        float counter = output[radius];
+
         for (int i = 1; i < radius; i++)
         {
             float gaussian = Gaussian(i, stdDev);
 
             output[radius + i] = gaussian;
             output[radius - i] = gaussian;
+
+            counter += 2 * gaussian;
         }
+
+        for (int i = 0; i < output.Length; i++)
+            output[i] *= 1 / counter;
 
         return output;
     }
 
     float Gaussian(int x, float stdDev)
     {
-        return 1 / (stdDev * sqrtTwoPi) * Mathf.Exp(-1 * (x*x)/(2* stdDev * stdDev));
+        return (1 / (stdDev * sqrtTwoPi)) * Mathf.Exp(-1 * (x*x)/(2* stdDev * stdDev));
     }
 
 }
