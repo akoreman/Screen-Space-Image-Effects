@@ -23,3 +23,6 @@ Some of the effects are demonstrated on a still from Big Buck Bunny, (c) copyrig
 
 **Pixel based cel shading effect**  
 <a href="https://github.com/akoreman/Screen-Space-Effects"><img src="https://raw.github.com/akoreman/screen-space-effects/main/images/PixelCel.png" width="400"></a>  
+
+**Gaussian blur**  
+<a href="https://github.com/akoreman/Screen-Space-Effects"><img src="https://raw.github.com/akoreman/screen-space-effects/main/images/Gaussian.png" width="400"></a>  
