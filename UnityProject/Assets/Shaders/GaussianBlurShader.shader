@@ -39,7 +39,7 @@ Shader "Effects/GaussianBlurShader"
 
             sampler2D _MainTex;
             int _radius;
-            float _kernel[64];
+            float _kernel[256];
             
 
             fixed4 frag (v2f input) : SV_Target
@@ -49,8 +49,8 @@ Shader "Effects/GaussianBlurShader"
                 
                 for (int i = 1; i < _radius; i++)
                 {
-                    col += _kernel[_radius + i] * tex2D(_MainTex, input.uv + float2(i * stepX, 0));
-                    col += _kernel[_radius - i] * tex2D(_MainTex, input.uv - float2(i * stepX, 0));
+                    col += _kernel[i] * tex2D(_MainTex, input.uv + float2(i * stepX, 0.0) );
+                    col += _kernel[i] * tex2D(_MainTex, input.uv - float2(i * stepX, 0.0) );
                 }
                 
                 return col;
@@ -89,17 +89,17 @@ Shader "Effects/GaussianBlurShader"
 
             sampler2D _MainTex;
             int _radius;
-            float _kernel[64];
+            float _kernel[256];
 
             fixed4 frag(v2f input) : SV_Target
             {
-                float4 col = _kernel[_radius] * tex2D(_MainTex, input.uv);
+                float4 col = _kernel[0] * tex2D(_MainTex, input.uv);
                 float stepY = 1.0 / (_ScreenParams.y);
 
                 for (int i = 1; i < _radius; i++)
                 {
-                    col += _kernel[_radius + i] * tex2D(_MainTex, input.uv + float2(0, i * stepY));
-                    col += _kernel[_radius - i] * tex2D(_MainTex, input.uv - float2(0, i * stepY));
+                    col += _kernel[i] * tex2D(_MainTex, input.uv + float2(0, i * stepY));
+                    col += _kernel[i] * tex2D(_MainTex, input.uv - float2(0, i * stepY));
                 }
 
                 return col;

@@ -15,36 +15,47 @@ public class ApplyGaussianBlurEffect : MonoBehaviour
 
     void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
-        RenderTexture tempRT = RenderTexture.GetTemporary(source.width, source.height, 0, source.format);
+        RenderTexture temporaryRenderTarget = RenderTexture.GetTemporary(source.width, source.height, 0, source.format);
 
         material.SetInt("_radius", radius);
         material.SetFloatArray("_kernel", GetKernel(radius, stdDev));
 
         // Perform both passes in order.
-        Graphics.Blit(source, tempRT, material, 0);   // First pass.
-        Graphics.Blit(tempRT, destination, material, 1);	// Second pass.
+        Graphics.Blit(source, temporaryRenderTarget, material, 0);   // First pass.
+        Graphics.Blit(temporaryRenderTarget, destination, material, 1);	// Second pass.
+
+        RenderTexture.ReleaseTemporary(temporaryRenderTarget);
     }
 
     float[] GetKernel(int radius, float stdDev)
     {
-        float[] output = new float[2 * radius + 1];
+        float[] output = new float[radius];
 
-        output[radius] = Gaussian(0, stdDev);
+        float counter = 0.0f;
 
-        float counter = output[radius];
-
-        for (int i = 1; i < radius; i++)
+        for (int i = 0; i < radius; i++)
         {
             float gaussian = Gaussian(i, stdDev);
 
-            output[radius + i] = gaussian;
-            output[radius - i] = gaussian;
+            output[i] = gaussian;
 
-            counter += 2 * gaussian;
+            if (i == 0)
+                counter += gaussian;
+            else
+                counter += 2 * gaussian;
         }
 
         for (int i = 0; i < output.Length; i++)
             output[i] *= 1 / counter;
+
+        /*
+        float test = 0.0f;
+
+        for (int i = 0; i < output.Length; i++)
+            test += output[i];
+
+        print(test);
+        */
 
         return output;
     }
