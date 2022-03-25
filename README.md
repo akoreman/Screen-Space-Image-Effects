@@ -9,6 +9,7 @@ Some of the effects are demonstrated on a still from Big Buck Bunny, (c) copyrig
   - Either display the gradients or add or subtract those from the input image.
 - Pixel based cel shading effect by limiting the number of available colors.
 - Multi-pass Gaussian blur, support for varying radius and standard deviation.
+- Bloom, using the Gaussian blur to create bleed-over from bright parts of the image.
 
 
 # Screenshots
